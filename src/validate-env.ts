@@ -6,6 +6,7 @@ export function validateEnvironmentVariables() {
   const useBedrock = process.env.CLAUDE_CODE_USE_BEDROCK === "1";
   const useVertex = process.env.CLAUDE_CODE_USE_VERTEX === "1";
   const anthropicApiKey = process.env.ANTHROPIC_API_KEY;
+  const anthropicBaseUrl = process.env.ANTHROPIC_BASE_URL;
 
   const errors: string[] = [];
 
@@ -16,7 +17,7 @@ export function validateEnvironmentVariables() {
   }
 
   if (!useBedrock && !useVertex) {
-    if (!anthropicApiKey) {
+    if (!anthropicApiKey && !anthropicBaseUrl) {
       errors.push(
         "ANTHROPIC_API_KEY is required when using direct Anthropic API.",
       );
